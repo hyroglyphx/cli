@@ -1,0 +1,16 @@
+name: Auto-Add Proposal Issues to Project Board
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  add-to-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to project board
+        if: github.event.issue.labels.*.name == 'proposal'
+        uses: actions/add-to-project@v1
+        with:
+          project-url: https://github.com/users/hyroglyphx/projects/1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
